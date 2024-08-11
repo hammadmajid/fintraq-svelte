@@ -4,12 +4,14 @@ import { Hono } from "hono";
 import { SignUp } from "endpoints/auth/signup";
 import { SignIn } from "endpoints/auth/signin";
 
+import { Bindings } from "./bindings";
+
 // Start a Hono app
-const app = new Hono();
+const app = new Hono<{ Bindings: Bindings }>();
 
 // Setup OpenAPI registry
 const openapi = fromHono(app, {
-	docs_url: "/",
+  docs_url: "/",
 });
 
 // Register OpenAPI endpoints
