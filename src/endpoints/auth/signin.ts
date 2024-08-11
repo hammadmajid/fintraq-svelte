@@ -1,6 +1,12 @@
 import { Bool, OpenAPIRoute } from "chanfana";
-import { z } from "zod";
+import { Scrypt } from "lucia";
 import { SignInForm } from "$types";
+
+import { z } from "zod";
+import { drizzle } from "drizzle-orm/d1";
+
+import { getUser, insertUser } from "functions/users";
+import { initializeLucia } from "db/lucia";
 
 export class SignIn extends OpenAPIRoute {
   schema = {
@@ -22,10 +28,7 @@ export class SignIn extends OpenAPIRoute {
           "application/json": {
             schema: z.object({
               series: z.object({
-                success: Bool(),
-                result: z.object({
-                  task: SignInForm,
-                }),
+                success: Bool().default(false),
               }),
             }),
           },
@@ -39,16 +42,28 @@ export class SignIn extends OpenAPIRoute {
     const data = await this.getValidatedData<typeof this.schema>();
 
     // Retrieve the validated request body
-    const userToCreate = data.body;
+    const { email, password } = data.body;
 
-    // TODO: Implement signin with lucia
+    const db = drizzle(c.env.DB);
 
-    // return the new task
+    const user = await getUser(db, email);
+    if (!user) {
+      return c.json({ error: "Invalid email or password." }, 400);
+    }
+
+    const validPassword = await new Scrypt().verify(user.password, password);
+    if (!validPassword) {
+      return c.json({ error: "Invalid email or password." }, 400);
+    }
+
+    const lucia = initializeLucia(c.env.DB);
+    const session = await lucia.createSession(user.id, {});
+    const cookie = lucia.createSessionCookie(session.id);
+
+    c.header("Set-Cookie", cookie.serialize(), { append: true });
+
     return {
       success: true,
-      task: {
-        email: userToCreate.email,
-      },
     };
   }
 }
