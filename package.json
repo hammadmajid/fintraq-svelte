@@ -9,14 +9,18 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"@lucia-auth/adapter-sqlite": "^3.0.2",
 		"chanfana": "^2.0.2",
-		"zod": "^3.23.8",
-		"hono": "^4.4.7"
+		"drizzle-orm": "^0.33.0",
+		"hono": "^4.4.7",
+		"lucia": "^3.2.0",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240806.0",
 		"@types/node": "20.8.3",
 		"@types/service-worker-mock": "^2.0.1",
+		"drizzle-kit": "^0.24.0",
 		"wrangler": "^3.60.3"
 	}
 }
