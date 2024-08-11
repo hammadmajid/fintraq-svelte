@@ -1,6 +1,12 @@
 import { Bool, OpenAPIRoute } from "chanfana";
-import { z } from "zod";
+import { Scrypt } from "lucia";
 import { SignUpForm } from "$types";
+
+import { z } from "zod";
+import { drizzle } from "drizzle-orm/d1";
+
+import { getUser, insertUser } from "functions/users";
+import { initializeLucia } from "db/lucia";
 
 export class SignUp extends OpenAPIRoute {
   schema = {
@@ -22,10 +28,7 @@ export class SignUp extends OpenAPIRoute {
           "application/json": {
             schema: z.object({
               series: z.object({
-                success: Bool(),
-                result: z.object({
-                  task: SignUpForm,
-                }),
+                success: Bool().default(false),
               }),
             }),
           },
@@ -38,18 +41,34 @@ export class SignUp extends OpenAPIRoute {
     // Get validated data
     const data = await this.getValidatedData<typeof this.schema>();
 
-    // Retrieve the validated request body
-    const userToCreate = data.body;
+    const { first_name, last_name, email, password } = data.body;
 
-    // TODO: Implement signup with lucia
+    const db = drizzle(c.env.DB);
 
-    // return the new task
+    const existingUser = await getUser(db, email);
+    if (existingUser) {
+      return c.json({ error: "User with that email already exists." }, 400);
+    }
+
+    const passwordHash = await new Scrypt().hash(password);
+
+    const user = await insertUser(db, {
+      name: first_name + " " + last_name,
+      email,
+      password: passwordHash,
+    });
+    if (!user) {
+      return c.json({ error: "An error occurred during sign up." }, 500);
+    }
+
+    const lucia = initializeLucia(c.env.DB);
+    const session = await lucia.createSession(user.id, {});
+    const cookie = lucia.createSessionCookie(session.id);
+
+    c.header("Set-Cookie", cookie.serialize(), { append: true });
+
     return {
       success: true,
-      task: {
-        full_name: userToCreate.first_name + " " + userToCreate.last_name,
-        email: userToCreate.email,
-      },
     };
   }
 }
