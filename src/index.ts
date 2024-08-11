@@ -1,6 +1,9 @@
 import { fromHono } from "chanfana";
 import { Hono } from "hono";
 
+import { SignUp } from "endpoints/auth/signup";
+import { SignIn } from "endpoints/auth/signin";
+
 // Start a Hono app
 const app = new Hono();
 
@@ -10,7 +13,8 @@ const openapi = fromHono(app, {
 });
 
 // Register OpenAPI endpoints
-openapi.get("/api/tasks", () => JSON.stringify({ hello: "world" }));
+openapi.post("/auth/signin", SignIn);
+openapi.post("/auth/signup", SignUp);
 
 // Export the Hono app
 export default app;
