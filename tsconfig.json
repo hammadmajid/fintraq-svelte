@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "src",
+		"baseUrl": "server",
 		"paths": {
 		  "$types": ["./types.ts"]
 		},
@@ -31,5 +31,5 @@
 		]
 	},
 	"exclude": ["node_modules", "dist", "tests"],
-	"include": ["src", "scripts"]
+	"include": ["server", "scripts"]
 }
