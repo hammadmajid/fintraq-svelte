@@ -1,6 +1,7 @@
 import { join } from "path";
 import type { Config } from "tailwindcss";
 import { skeleton } from "@skeletonlabs/tw-plugin";
+import forms from "@tailwindcss/forms";
 
 const config = {
   darkMode: "class",
@@ -18,6 +19,7 @@ const config = {
     skeleton({
       themes: { preset: ["hamlindigo"] },
     }),
+    forms,
   ],
 } satisfies Config;
 

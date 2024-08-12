@@ -19,6 +19,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240806.0",
+		"@tailwindcss/forms": "^0.5.7",
 		"@types/node": "20.8.3",
 		"@types/service-worker-mock": "^2.0.1",
 		"drizzle-kit": "^0.24.0",
