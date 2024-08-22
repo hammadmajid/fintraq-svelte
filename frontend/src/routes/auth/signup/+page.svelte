@@ -13,11 +13,15 @@
 
   export let data: PageData;
 
+  let formErrMessage = "";
+
   const { form, enhance, delayed, errors } = superForm(data.form, {
     validators: zod(SignUpForm),
     onResult({ result }) {
       if (result.type === "redirect") {
         goto(result.location);
+      } else if (result.type == "error") {
+        formErrMessage = result.error.message;
       }
     },
   });
@@ -68,6 +72,10 @@
       placeholder="Password"
       bind:value={$form.password}
     />
+
+    <p class="text-error-700">
+      {formErrMessage}
+    </p>
 
     <div class="flex flex-row gap-4 items-center">
       <button class="btn variant-filled" type="submit"
