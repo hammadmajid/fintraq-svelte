@@ -1,5 +1,5 @@
 import type { Actions } from "./$types";
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 
 import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
@@ -28,7 +28,7 @@ export const actions: Actions = {
     // TODO: somehow trigger goto() after success
     // const data = await axios.post('')
 
-    return message(form, "Form posted successfully!");
+    return redirect(307, '/app/profile');
   },
 };
 

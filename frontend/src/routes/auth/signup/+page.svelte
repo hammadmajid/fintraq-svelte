@@ -9,11 +9,17 @@
   import TextInput from "$lib/components/TextInput.svelte";
 
   import { SignUpForm } from "@types";
+  import { goto } from "$app/navigation";
 
   export let data: PageData;
 
   const { form, enhance, delayed, errors } = superForm(data.form, {
     validators: zod(SignUpForm),
+    onResult({ result }) {
+      if (result.type === "redirect") {
+        goto(result.location);
+      }
+    },
   });
 </script>
 
