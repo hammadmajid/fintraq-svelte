@@ -6,7 +6,7 @@
   export let value: string;
 </script>
 
-<label for={name} class="label">
+<label for={name} class="label w-full">
   <input
     {name}
     id={name}

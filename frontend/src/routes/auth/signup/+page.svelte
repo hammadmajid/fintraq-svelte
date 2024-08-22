@@ -40,7 +40,7 @@
   </div>
   <SuperFormDebug form={$form} />
 
-  <form class="space-y-2 lg:w-1/3" method="POST" use:enhance>
+  <form class="space-y-2 w-full lg:w-3/4" method="POST" use:enhance>
     <div class="flex flex-col gap-2 md:flex-row">
       <TextInput
         name="first_name"
