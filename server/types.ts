@@ -1,9 +1,8 @@
-import { Str } from "chanfana";
 import { z } from "zod";
 
 export const SignUpForm = z.object({
-  first_name: Str(),
-  last_name: Str(),
+  first_name: z.string().min(1),
+  last_name: z.string().min(1),
   email: z.string().email(),
   password: z.string().min(6),
 });
