@@ -1,13 +1,13 @@
 import { z } from "zod";
 
 export const SignUpForm = z.object({
-  first_name: z.string().min(1),
-  last_name: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(6),
+  first_name: z.string().min(1, "Name must contain at least 1 character"),
+  last_name: z.string().min(1, "Name must contain at least 1 character"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must contain at least 6 characters"),
 });
 
 export const SignInForm = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must contain at least 6 characters"),
 });
