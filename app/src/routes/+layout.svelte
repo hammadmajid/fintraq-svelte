@@ -17,15 +17,15 @@
   const homeLinks = [
     {
       name: "Product",
-      href: "#product",
+      href: "/#product",
     },
     {
       name: "Pricing",
-      href: "#pricing",
+      href: "/#pricing",
     },
     {
       name: "Help",
-      href: "#help",
+      href: "/#help",
     },
     {
       name: "Changelog",
@@ -73,7 +73,7 @@
       </Sheet.Trigger>
       <Sheet.Content side="left">
         <nav class="grid gap-6 text-lg font-medium">
-          <a href="##" class="flex items-center gap-2 text-lg font-semibold">
+          <a href="/" class="flex items-center gap-2 text-lg font-semibold">
             <WalletCard class="h-6 w-6" />
             <span class="sr-only">Fintraq</span>
           </a>
