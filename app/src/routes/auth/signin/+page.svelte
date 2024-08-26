@@ -1,8 +1,29 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index";
+  import { Button } from "$lib/components/ui/button/index.js";
   import * as Card from "$lib/components/ui/card/index";
   import { Input } from "$lib/components/ui/input/index";
-  import { Label } from "$lib/components/ui/label/index";
+  import * as Form from "$lib/components/ui/form";
+
+  import type { PageData } from "./$types";
+  import { goto } from "$app/navigation";
+
+  import { superForm } from "sveltekit-superforms";
+  import { zodClient } from "sveltekit-superforms/adapters";
+
+  import { SignInForm } from "@types";
+
+  export let data: PageData;
+
+  const form = superForm(data.form, {
+    validators: zodClient(SignInForm),
+    onResult({ result }) {
+      if (result.type === "redirect") {
+        goto(result.location);
+      }
+    },
+  });
+
+  const { form: formData, enhance } = form;
 </script>
 
 <main class="bg-muted/40 flex min-h-screen w-full flex-col">
@@ -10,27 +31,50 @@
 
   <Card.Root class="mx-auto max-w-sm">
     <Card.Header>
-      <Card.Title class="text-2xl" tag="h1">Login</Card.Title>
+      <Card.Title class="text-2xl" tag="h1">Sign In</Card.Title>
       <Card.Description
         >Enter your email below to login to your account</Card.Description
       >
     </Card.Header>
     <Card.Content>
       <div class="grid gap-4">
-        <div class="grid gap-2">
-          <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
-        </div>
-        <div class="grid gap-2">
-          <div class="flex items-center">
-            <Label for="password">Password</Label>
-            <a href="##" class="ml-auto inline-block text-sm underline">
-              Forgot your password?
-            </a>
+        <form method="POST" use:enhance class="grid gap-2">
+          <div class="grid gap-2">
+            <Form.Field {form} name="email">
+              <Form.Control let:attrs>
+                <Form.Label>Email</Form.Label>
+                <Input
+                  {...attrs}
+                  type="email"
+                  placeholder="m@example.com"
+                  bind:value={$formData.email}
+                />
+              </Form.Control>
+              <Form.FieldErrors />
+            </Form.Field>
           </div>
-          <Input id="password" type="password" required />
-        </div>
-        <Button type="submit" class="w-full">Login</Button>
+          <div class="grid gap-2">
+            <Form.Field {form} name="password">
+              <Form.Control let:attrs>
+                <Form.Label>
+                  <p class="flex flex-row justify-between items-center">
+                    <span>Password</span>
+                    <a href="##" class="ml-auto inline-block text-sm underline">
+                      Forgot your password?
+                    </a>
+                  </p>
+                </Form.Label>
+                <Input
+                  {...attrs}
+                  type="password"
+                  bind:value={$formData.password}
+                />
+              </Form.Control>
+              <Form.FieldErrors />
+            </Form.Field>
+          </div>
+          <Button type="submit" class="w-full">Sign In</Button>
+        </form>
       </div>
       <div class="mt-4 text-center text-sm">
         Don&apos;t have an account?
