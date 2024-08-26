@@ -31,7 +31,7 @@
 
   <Card.Root class="mx-auto max-w-sm">
     <Card.Header>
-      <Card.Title class="text-2xl">Sign Up</Card.Title>
+      <Card.Title class="text-2xl" tag="h1">Sign Up</Card.Title>
       <Card.Description
         >Enter your information to create an account</Card.Description
       >
@@ -39,7 +39,7 @@
 
     <Card.Content>
       <div class="grid gap-4">
-        <form method="POST" use:enhance class="grid gap-4">
+        <form method="POST" use:enhance class="grid gap-2">
           <div class="grid grid-cols-2 gap-4">
             <div class="grid gap-2">
               <Form.Field {form} name="first_name">
