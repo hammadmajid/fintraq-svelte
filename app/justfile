@@ -1,0 +1,6 @@
+clean-build:
+    # server deps are required because server/types.ts imports zod 
+    cd .. && bun install --frozen 
+    npx svelte-kit sync
+    bun run build
+    
