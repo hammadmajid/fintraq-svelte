@@ -42,28 +42,28 @@
         <form method="POST" use:enhance class="grid gap-2">
           <div class="grid grid-cols-2 gap-4">
             <div class="grid gap-2">
-              <Form.Field {form} name="first_name">
+              <Form.Field {form} name="firstName">
                 <Form.Control let:attrs>
                   <Form.Label>First name</Form.Label>
                   <Input
                     {...attrs}
                     type="text"
                     placeholder="Max"
-                    bind:value={$formData.first_name}
+                    bind:value={$formData.firstName}
                   />
                 </Form.Control>
                 <Form.FieldErrors />
               </Form.Field>
             </div>
             <div class="grid gap-2">
-              <Form.Field {form} name="last_name">
+              <Form.Field {form} name="lastName">
                 <Form.Control let:attrs>
                   <Form.Label>Last name</Form.Label>
                   <Input
                     {...attrs}
                     type="text"
                     placeholder="Robbinson"
-                    bind:value={$formData.last_name}
+                    bind:value={$formData.lastName}
                   />
                 </Form.Control>
                 <Form.FieldErrors />

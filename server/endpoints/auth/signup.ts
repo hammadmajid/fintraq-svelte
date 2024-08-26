@@ -41,7 +41,7 @@ export class SignUp extends OpenAPIRoute {
     // Get validated data
     const data = await this.getValidatedData<typeof this.schema>();
 
-    const { first_name, last_name, email, password } = data.body;
+    const { firstName, lastName, email, password } = data.body;
 
     const db = drizzle(c.env.DB);
 
@@ -53,7 +53,7 @@ export class SignUp extends OpenAPIRoute {
     const passwordHash = await new Scrypt().hash(password);
 
     const user = await insertUser(db, {
-      name: first_name + " " + last_name,
+      name: firstName + " " + lastName,
       email,
       password: passwordHash,
     });
