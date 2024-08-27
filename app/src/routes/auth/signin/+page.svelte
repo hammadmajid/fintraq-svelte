@@ -3,6 +3,9 @@
   import * as Card from "$lib/components/ui/card/index";
   import { Input } from "$lib/components/ui/input/index";
   import * as Form from "$lib/components/ui/form";
+  import * as Alert from "$lib/components/ui/alert/index.js";
+
+  import CircleAlert from "lucide-svelte/icons/circle-alert";
 
   import type { PageData } from "./$types";
   import { goto } from "$app/navigation";
@@ -23,7 +26,7 @@
     },
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formData, enhance, message } = form;
 </script>
 
 <main class="bg-muted/40 flex min-h-screen w-full flex-col">
@@ -38,6 +41,13 @@
     </Card.Header>
     <Card.Content>
       <div class="grid gap-4">
+        {#if $message}
+          <Alert.Root variant="destructive">
+            <CircleAlert class="h-4 w-4" />
+            <Alert.Title>Error</Alert.Title>
+            <Alert.Description>{$message}</Alert.Description>
+          </Alert.Root>
+        {/if}
         <form method="POST" use:enhance class="grid gap-2">
           <div class="grid gap-2">
             <Form.Field {form} name="email">
