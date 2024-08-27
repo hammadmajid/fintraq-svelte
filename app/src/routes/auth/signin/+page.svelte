@@ -6,6 +6,7 @@
   import * as Alert from "$lib/components/ui/alert/index.js";
 
   import CircleAlert from "lucide-svelte/icons/circle-alert";
+  import LoaderCircle from "lucide-svelte/icons/loader-circle";
 
   import type { PageData } from "./$types";
   import { goto } from "$app/navigation";
@@ -26,7 +27,7 @@
     },
   });
 
-  const { form: formData, enhance, message } = form;
+  const { form: formData, enhance, message, delayed } = form;
 </script>
 
 <svelte:head>
@@ -87,7 +88,16 @@
               <Form.FieldErrors />
             </Form.Field>
           </div>
-          <Button type="submit" class="w-full">Sign In</Button>
+          <Button type="submit" class="w-full">
+            <span class="flex flex-row gap-2 items-center">
+              <span> Sign In </span>
+              {#if $delayed}
+                <span class="animate-spin">
+                  <LoaderCircle size="18px" />
+                </span>
+              {/if}
+            </span></Button
+          >
         </form>
       </div>
       <div class="mt-4 text-center text-sm">
