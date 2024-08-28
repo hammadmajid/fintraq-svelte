@@ -67,8 +67,6 @@ export class SignUp extends OpenAPIRoute {
 
     c.header("Set-Cookie", cookie.serialize(), { append: true });
 
-    return {
-      success: true,
-    };
+    return c.json({ success: true })
   }
 }
