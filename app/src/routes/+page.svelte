@@ -6,7 +6,7 @@
   <title>Fintraq</title>
 </svelte:head>
 
-<main class="bg-muted/40 flex min-h-screen w-full flex-col">
+<main class="flex min-h-screen w-full flex-col">
   <div class="my-4 md:my-8"></div>
   <div class="container space-y-4">
     <div>

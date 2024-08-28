@@ -34,7 +34,7 @@
   <title>Sign In</title>
 </svelte:head>
 
-<main class="bg-muted/40 flex min-h-screen w-full flex-col">
+<main class="flex min-h-screen w-full flex-col">
   <div class="my-4 md:my-8"></div>
 
   <Card.Root class="mx-auto max-w-sm">
