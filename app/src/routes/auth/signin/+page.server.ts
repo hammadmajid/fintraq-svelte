@@ -1,4 +1,4 @@
-import type { Actions, PageServerLoad} from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
 
 import { superValidate, message } from "sveltekit-superforms";
@@ -32,35 +32,32 @@ export const actions: Actions = {
 
     const data = form.data;
 
-    const response = await fetch(`${API_URL}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data)
-    });
+    try {
+      const response = await fetch(`${API_URL}/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
 
-    const parsed = await response.json();
+      if (response.status !== 200) {
+        return message(form, 'Invalid username or password')
+      }
 
-    // TODO: if the connection fails: return message() with appopriate error
-    // console.log(response);
-    // console.log(response.statusText);
-    // console.log(parsed);
+      const sessionCookie = setCookie.parse(response.headers.getSetCookie()[0])[0];
 
-    if (response.status !== 200) {
-      return message(form, 'Invalid username or password')
+      cookies.set("session", sessionCookie.value, {
+        path: sessionCookie.path,
+        httpOnly: sessionCookie.httpOnly,
+        sameSite: sessionCookie.sameSite,
+        maxAge: sessionCookie.maxAge,
+        secure: sessionCookie.secure,
+      })
+
+      return redirect(302, '/app/profile');
+    } catch (err) {
+      return message(form, 'Internal server error');
     }
-
-    const sessionCookie = setCookie.parse(response.headers.getSetCookie()[0])[0];
-
-    cookies.set("session", sessionCookie.value, {
-      path: sessionCookie.path,
-      httpOnly: sessionCookie.httpOnly,
-      sameSite: sessionCookie.sameSite,
-      maxAge: sessionCookie.maxAge,
-      secure: sessionCookie.secure,
-    })
-
-    return redirect(302, '/app/profile');
   },
 };

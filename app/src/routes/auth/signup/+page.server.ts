@@ -30,6 +30,8 @@ export const actions: Actions = {
 
     const data = form.data;
 
+    try {
+      
     const response = await fetch(`${API_URL}/auth/signup`, {
       method: 'POST',
       headers: {
@@ -37,9 +39,7 @@ export const actions: Actions = {
       },
       body: JSON.stringify(data)
     });
-    const parsed = await response.json();
 
-    console.log(parsed);
     if (response.status !== 200) {
       return message(form, 'Failed to create an account')
     }
@@ -55,5 +55,9 @@ export const actions: Actions = {
     })
 
     return redirect(307, '/app/profile');
+    }
+    catch (err) {
+      return message(form, 'Internal server error');
+    }
   },
 };
