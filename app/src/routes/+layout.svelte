@@ -14,6 +14,18 @@
   import { ModeWatcher } from "mode-watcher";
   import { resetMode, setMode } from "mode-watcher";
 
+  import { fly } from "svelte/transition";
+  import { cubicIn, cubicOut } from "svelte/easing";
+
+  export let data;
+
+  const duration = 200;
+  const delay = duration + 100;
+  const y = 10;
+
+  const transitionIn = { easing: cubicOut, y, duration, delay };
+  const transitionOut = { easing: cubicIn, y: -y, duration };
+
   const homeLinks = [
     {
       name: "Product",
@@ -120,7 +132,9 @@
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   </header>
-  <div>
-    <slot />
-  </div>
+  {#key data.pathname}
+    <div class="bg-muted/40" in:fly={transitionIn} out:fly={transitionOut}>
+      <slot />
+    </div>
+  {/key}
 </div>
