@@ -3,8 +3,10 @@
   import * as Card from "$lib/components/ui/card/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { Switch } from "$lib/components/ui/switch/index.js";
+  import * as Accordion from "$lib/components/ui/accordion/index";
 
   import { tiers, PaymentType } from "$lib/content/tiers";
+  import { FAQs } from "$lib/content/faq";
 
   let paymentType: PaymentType = PaymentType.Monthly;
 </script>
@@ -17,7 +19,10 @@
   <div></div>
   <div class="container space-y-4">
     <div class="space-y-2">
-      <h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
+      <h1
+        id="product"
+        class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl"
+      >
         Fintraq
       </h1>
       <p class="text-muted-foreground text-xl">
@@ -35,15 +40,15 @@
     </div>
   </div>
   <section class="container space-y-4">
-    <div class="space-y-2 text-center">
+    <div class="space-y-2 text-center capitalize">
       <h2
         id="pricing"
         class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
       >
-        Choose the plan that's right for you.
+        Choose the Plan That's Right for You.
       </h2>
-      <div class="space-y-3">
-        <p class="text-xl">How would you like to pay?</p>
+      <div class="space-y-3 text-muted-foreground">
+        <p class="text-xl">How Would You Like to Pay?</p>
         <div class="flex items-center space-x-2 justify-center">
           <Label for="payment-type">Monthly</Label>
           <Switch
@@ -91,6 +96,29 @@
         </Card.Root>
       {/each}
     </div>
+  </section>
+  <section class="container space-y-4">
+    <div class="text-center space-y-2 capitalize">
+      <h2
+        id="help"
+        class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+      >
+        Frequently Asked Questions
+      </h2>
+      <p class="text-xl text-muted-foreground">
+        Everything You Need to Know About This Project.
+      </p>
+    </div>
+    <Accordion.Root class="w-full sm:max-w-[50%] mx-auto">
+      {#each FAQs as FAQ}
+        <Accordion.Item value={FAQ.value}>
+          <Accordion.Trigger>{FAQ.question}</Accordion.Trigger>
+          <Accordion.Content>
+            {FAQ.answer}
+          </Accordion.Content>
+        </Accordion.Item>
+      {/each}
+    </Accordion.Root>
   </section>
   <div></div>
 </main>
