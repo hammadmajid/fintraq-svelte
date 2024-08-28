@@ -15,6 +15,7 @@
 		"drizzle-orm": "^0.33.0",
 		"hono": "^4.4.7",
 		"lucia": "^3.2.0",
+		"set-cookie-parser": "^2.7.0",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
