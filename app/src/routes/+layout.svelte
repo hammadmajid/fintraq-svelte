@@ -10,6 +10,7 @@
   import { Button } from "$lib/components/ui/button/index";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index";
   import * as Sheet from "$lib/components/ui/sheet/index";
+  import { Badge } from "$lib/components/ui/badge/index";
 
   import { ModeWatcher } from "mode-watcher";
   import { resetMode, setMode } from "mode-watcher";
@@ -102,6 +103,7 @@
       </Sheet.Content>
     </Sheet.Root>
     <div class="flex-1 w-full"></div>
+    <Badge variant="destructive">Pre alpha</Badge>
     <a href="https://github.com/hammadmajid/fintraq" class="">
       <Button variant="outline" size="icon">
         <Github />
