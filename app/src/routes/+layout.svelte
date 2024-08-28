@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../app.css";
 
   import Menu from "lucide-svelte/icons/menu";
@@ -12,6 +12,7 @@
   import * as Sheet from "$lib/components/ui/sheet/index";
   import { Badge } from "$lib/components/ui/badge/index";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import { Input } from "$lib/components/ui/input/index.js";
 
   import { ModeWatcher } from "mode-watcher";
   import { resetMode, setMode } from "mode-watcher";
@@ -28,7 +29,13 @@
   const transitionIn = { easing: cubicOut, y, duration, delay };
   const transitionOut = { easing: cubicIn, y: -y, duration };
 
-  const homeLinks = [
+  interface Link {
+    name: string;
+    href: string;
+    external?: boolean;
+  }
+
+  const homeLinks: Link[] = [
     {
       name: "Product",
       href: "/#product",
@@ -44,6 +51,24 @@
     {
       name: "Changelog",
       href: "https://github.com/hammadmajid/fintraq/commits/main/",
+    },
+  ];
+
+  const githubLinks: Link[] = [
+    {
+      name: "Issues",
+      href: "https://github.com/hammadmajid/fintraq/issues",
+      external: true,
+    },
+    {
+      name: "Pull Requests",
+      href: "https://github.com/hammadmajid/fintraq/pulls",
+      external: true,
+    },
+    {
+      name: "License",
+      href: "https://github.com/hammadmajid/fintraq/tree/main/LICENSE",
+      external: true,
     },
   ];
 </script>
@@ -149,4 +174,58 @@
       <slot />
     </div>
   {/key}
+  <footer
+    class="pt-12 pb-28 container border-t grid md:grid-cols-[1fr_1fr_1fr_2fr] gap-8 md:gap-0"
+  >
+    <div class="container space-y-4">
+      <a
+        href="/"
+        class="flex items-center gap-2 text-lg font-semibold md:text-base"
+      >
+        <WalletCard class="h-6 w-6" />
+        <span>Fintraq</span>
+      </a>
+      <p class="scroll text-muted-foreground">
+        A finance tracking app build with SvelteKit and Hono.
+      </p>
+    </div>
+
+    <div class="container">
+      <ul>
+        {#each homeLinks as link}
+          <li>
+            <a class="text-muted-foreground hover:text-primary" href={link.href}
+              >{link.name}</a
+            >
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="container">
+      <ul>
+        {#each githubLinks as { name, href, external }}
+          <li>
+            <a
+              class="text-muted-foreground hover:text-primary"
+              {href}
+              target={external ? "_blank" : "_self"}>{name}</a
+            >
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="container space-y-3">
+      <h4>Newsletter</h4>
+      <p class="text-muted-foreground">
+        Subscribe to our newsletter to get the latest updates.
+      </p>
+
+      <form>
+        <div class="space-y-2 lg:flex lg:space-x-2 lg:space-y-0">
+          <Input type="email" placeholder="email" class="w-full" required />
+          <Button variant="secondary" class="w-full">Subscribe</Button>
+        </div>
+      </form>
+    </div>
+  </footer>
 </div>
