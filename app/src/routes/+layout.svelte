@@ -6,6 +6,7 @@
   import Sun from "lucide-svelte/icons/sun";
   import Moon from "lucide-svelte/icons/moon";
   import Github from "lucide-svelte/icons/github";
+  import Dot from "lucide-svelte/icons/dot";
 
   import { Button } from "$lib/components/ui/button/index";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index";
@@ -174,58 +175,69 @@
       <slot />
     </div>
   {/key}
-  <footer
-    class="pt-12 pb-28 container border-t grid md:grid-cols-[1fr_1fr_1fr_2fr] gap-8 md:gap-0"
-  >
-    <div class="container space-y-4">
-      <a
-        href="/"
-        class="flex items-center gap-2 text-lg font-semibold md:text-base"
-      >
-        <WalletCard class="h-6 w-6" />
-        <span>Fintraq</span>
-      </a>
-      <p class="scroll text-muted-foreground">
-        A finance tracking app build with SvelteKit and Hono.
-      </p>
-    </div>
+  <footer class="pt-12 pb-28 container border-t space-y-8">
+    <div class="grid md:grid-cols-[1.5fr_1fr_1fr_2fr] gap-8 md:gap-0">
+      <div class="space-y-4">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-lg font-semibold md:text-base"
+        >
+          <WalletCard class="h-6 w-6" />
+          <span>Fintraq</span>
+        </a>
+        <p class="scroll text-muted-foreground">
+          A finance tracking app build with SvelteKit and Hono.
+        </p>
+      </div>
 
-    <div class="container">
-      <ul>
-        {#each homeLinks as link}
-          <li>
-            <a class="text-muted-foreground hover:text-primary" href={link.href}
-              >{link.name}</a
-            >
-          </li>
-        {/each}
-      </ul>
-    </div>
-    <div class="container">
-      <ul>
-        {#each githubLinks as { name, href, external }}
-          <li>
-            <a
-              class="text-muted-foreground hover:text-primary"
-              {href}
-              target={external ? "_blank" : "_self"}>{name}</a
-            >
-          </li>
-        {/each}
-      </ul>
-    </div>
-    <div class="container space-y-3">
-      <h4>Newsletter</h4>
-      <p class="text-muted-foreground">
-        Subscribe to our newsletter to get the latest updates.
-      </p>
+      <div class="">
+        <ul>
+          {#each homeLinks as link}
+            <li>
+              <a
+                class="text-muted-foreground hover:text-primary"
+                href={link.href}>{link.name}</a
+              >
+            </li>
+          {/each}
+        </ul>
+      </div>
+      <div class="">
+        <ul>
+          {#each githubLinks as { name, href, external }}
+            <li>
+              <a
+                class="text-muted-foreground hover:text-primary"
+                {href}
+                target={external ? "_blank" : "_self"}>{name}</a
+              >
+            </li>
+          {/each}
+        </ul>
+      </div>
+      <div class="space-y-3">
+        <h4>Newsletter</h4>
+        <p class="text-muted-foreground">
+          Subscribe to our newsletter to get the latest updates.
+        </p>
 
-      <form>
-        <div class="space-y-2 lg:flex lg:space-x-2 lg:space-y-0">
-          <Input type="email" placeholder="email" class="w-full" required />
-          <Button variant="secondary" class="w-full">Subscribe</Button>
-        </div>
-      </form>
+        <form>
+          <div class="space-y-2 lg:flex lg:space-x-2 lg:space-y-0">
+            <Input type="email" placeholder="email" class="w-full" required />
+            <Button variant="secondary" class="w-full md:w-auto"
+              >Subscribe</Button
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="text-center text-muted-foreground space-y-2">
+      <p class="muted">Uncopyrighted 2024</p>
+      <p class="text-sm flex items-center justify-center">
+        <a class="block hover:text-primary" href="/terms">Terms</a>
+        <Dot/>
+        <a class="block hover:text-primary" href="/privacy">Privacy</a>
+      </p>
     </div>
   </footer>
 </div>
