@@ -133,4 +133,21 @@
     </Accordion.Root>
   </section>
   <div></div>
+  <section
+    class="bg-primary p-8 md:px-20 md:py-20 flex flex-col items-center text-center"
+  >
+    <h2
+      class="text-secondary scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+    >
+      Need more information?
+    </h2>
+    <p class="text-muted-foreground mt-2 text-lg md:text-xl">
+      Our team is happy to help you get started as fast as possible.
+    </p>
+    <div class="mt-5">
+      <a href="/auth/contact">
+        <Button variant="secondary">Contact us</Button>
+      </a>
+    </div>
+  </section>
 </main>
