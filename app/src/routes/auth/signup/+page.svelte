@@ -34,18 +34,24 @@
   <title>Sign Up</title>
 </svelte:head>
 
-<main class="flex min-h-screen w-full flex-col">
-  <div class="my-4 md:my-8"></div>
-
-  <Card.Root class="mx-auto max-w-sm">
-    <Card.Header>
-      <Card.Title class="text-2xl" tag="h1">Sign Up</Card.Title>
-      <Card.Description
-        >Enter your information to create an account</Card.Description
-      >
-    </Card.Header>
-
-    <Card.Content>
+<div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+  <div class="bg-muted hidden lg:block">
+    <img
+      src="/placeholder.avif"
+      alt="placeholder"
+      width="1920"
+      height="1080"
+      class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+    />
+  </div>
+  <div class="flex items-center justify-center py-12">
+    <div class="mx-auto grid w-[350px] gap-6">
+      <div class="grid gap-2 text-center">
+        <h1 class="text-3xl font-bold">Create an account</h1>
+        <p class="text-muted-foreground text-balance">
+          Enter your information below to create an account.
+        </p>
+      </div>
       <div class="grid gap-4">
         {#if $message}
           <Alert.Root variant="destructive">
@@ -127,8 +133,8 @@
       </div>
       <div class="mt-4 text-center text-sm">
         Already have an account?
-        <a href="/auth/signin" class="underline"> Sign in </a>
+        <a href="/auth/signin" class="underline"> Sign In </a>
       </div>
-    </Card.Content>
-  </Card.Root>
-</main>
+    </div>
+  </div>
+</div>
