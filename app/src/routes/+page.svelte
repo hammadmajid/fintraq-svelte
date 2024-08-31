@@ -75,33 +75,35 @@
         </div>
       </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-4">
-      {#each tiers as teir}
-        <Card.Root>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-center gap-8">
+      {#each tiers as tier}
+        <Card.Root
+          class="md:min-w-[300px] md:max-w-[350px] h-full last:bg-blend-multiply last:shadow-2xl last:shadow-primary"
+        >
           <Card.Header>
-            <Card.Title>{teir.title}</Card.Title>
-            <Card.Description>{teir.description}</Card.Description>
+            <Card.Title>{tier.title}</Card.Title>
+            <Card.Description>{tier.description}</Card.Description>
           </Card.Header>
           <Card.Content>
             <h4>
               <span class="font-bold text-2xl">
-                ${teir.amount(paymentType).base}</span
+                ${tier.amount(paymentType).base}</span
               >.<span class="align-super"
-                >{teir.amount(paymentType).decimal}
+                >{tier.amount(paymentType).decimal}
               </span>/
               <span>
-                {teir.amount(paymentType).mode}
+                {tier.amount(paymentType).mode}
               </span>
             </h4>
             <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
-              {#each teir.features as feature}
+              {#each tier.features as feature}
                 <li>{feature}</li>
               {/each}
             </ul>
           </Card.Content>
           <Card.Footer>
             <a href="/auth/signup" class="w-full">
-              <Button variant={teir.button} class="w-full">{teir.action}</Button
+              <Button variant={tier.button} class="w-full">{tier.action}</Button
               >
             </a>
           </Card.Footer>
