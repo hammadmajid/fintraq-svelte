@@ -9,6 +9,8 @@
   import { FAQs } from "$lib/content/faq";
 
   let paymentType: PaymentType = PaymentType.Monthly;
+
+  import { mode } from "mode-watcher";
 </script>
 
 <svelte:head>
@@ -17,28 +19,38 @@
 
 <main class="flex min-h-screen w-full flex-col gap-24">
   <div></div>
-  <div class="container space-y-4">
-    <div class="space-y-2">
-      <h1
-        id="product"
-        class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl"
-      >
-        Fintraq
-      </h1>
-      <p class="text-muted-foreground text-xl">
-        A finance tracking app built with SvelteKit and HonoJs.
-      </p>
-    </div>
+  <div class="container grid md:grid-cols-2 items-center">
+    <div class="space-y-4">
+      <div class="space-y-2">
+        <h1
+          id="product"
+          class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl"
+        >
+          Fintraq
+        </h1>
+        <p class="text-muted-foreground text-xl">
+          A finance tracking app built with SvelteKit and HonoJs
+        </p>
+      </div>
 
-    <div class="flex flex-row gap-2">
-      <a href="/auth/signup">
-        <Button>Get started</Button>
-      </a>
-      <a href="/auth/signin">
-        <Button variant="secondary">Login</Button>
-      </a>
+      <div class="flex flex-row gap-2">
+        <a href="/auth/signup">
+          <Button>Get started</Button>
+        </a>
+        <a href="/auth/signin">
+          <Button variant="secondary">Login</Button>
+        </a>
+      </div>
+    </div>
+    <div class="hidden md:block">
+      {#if $mode == "light"}
+        <img src="/hero.svg" alt="Astronuat in space" />
+      {:else}
+        <img src="/hero-dark.svg" alt="Astronuat in space" />
+      {/if}
     </div>
   </div>
+
   <section class="container space-y-4">
     <div class="space-y-2 text-center capitalize">
       <h2
