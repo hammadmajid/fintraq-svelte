@@ -51,6 +51,41 @@
     </div>
   </div>
 
+  <section class="container space-y-12 text-center">
+    <div class="">
+      <h2
+        class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+      >
+        People all over the world trust us
+      </h2>
+      <p class="text-muted-foreground text-xl">
+        For growing their business with the powerfull tools with offer
+      </p>
+    </div>
+    <div class="grid grid-cols-4 gap-1">
+      <div
+        class="bg-secondary p-2 md:p-4 first:rounded-tl-lg first:rounded-bl-lg"
+      >
+        <p class="text-xl md:text-4xl font-semibold">100+</p>
+        <p class="text-sm text-muted-foreground">Commis</p>
+      </div>
+      <div class="bg-secondary p-2 md:p-4">
+        <p class="text-xl md:text-4xl font-semibold">100+</p>
+        <p class="text-sm text-muted-foreground">Commis</p>
+      </div>
+      <div class="bg-secondary p-2 md:p-4">
+        <p class="text-xl md:text-4xl font-semibold">100+</p>
+        <p class="text-sm text-muted-foreground">Commis</p>
+      </div>
+      <div
+        class="bg-secondary p-2 md:p-4 last:rounded-tr-lg last:rounded-br-lg"
+      >
+        <p class="text-xl md:text-4xl font-semibold">100+</p>
+        <p class="text-sm text-muted-foreground">Commis</p>
+      </div>
+    </div>
+  </section>
+
   <section class="container space-y-4">
     <div class="space-y-2 text-center capitalize">
       <h2

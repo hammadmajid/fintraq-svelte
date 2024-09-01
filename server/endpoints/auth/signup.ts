@@ -22,7 +22,7 @@ export class SignUp extends OpenAPIRoute {
       },
     },
     responses: {
-      "200": {
+      "201": {
         description: "Returns the created user",
         content: {
           "application/json": {

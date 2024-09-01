@@ -7,13 +7,13 @@ import { zod } from "sveltekit-superforms/adapters";
 import { API_URL } from "$env/static/private";
 
 // @ts-ignore
-import setCookie from 'set-cookie-parser';
+import setCookie from "set-cookie-parser";
 
 import { SignUpForm } from "@types";
 
 export const load: PageServerLoad = async ({ locals }) => {
   if (locals.session) {
-    redirect(302, '/app/profile');
+    redirect(302, "/app/profile");
   }
 
   return {
@@ -31,33 +31,33 @@ export const actions: Actions = {
     const data = form.data;
 
     try {
-      
-    const response = await fetch(`${API_URL}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data)
-    });
+      const response = await fetch(`${API_URL}/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (response.status !== 200) {
-      return message(form, 'Failed to create an account')
-    }
+      if (response.status !== 201) {
+        return message(form, "Failed to create an account");
+      }
 
-    const sessionCookie = setCookie.parse(response.headers.getSetCookie()[0])[0];
+      const sessionCookie = setCookie.parse(
+        response.headers.getSetCookie()[0],
+      )[0];
 
-    cookies.set("session", sessionCookie.value, {
-      path: sessionCookie.path,
-      httpOnly: sessionCookie.httpOnly,
-      sameSite: sessionCookie.sameSite,
-      maxAge: sessionCookie.maxAge,
-      secure: sessionCookie.secure,
-    })
+      cookies.set("session", sessionCookie.value, {
+        path: sessionCookie.path,
+        httpOnly: sessionCookie.httpOnly,
+        sameSite: sessionCookie.sameSite,
+        maxAge: sessionCookie.maxAge,
+        secure: sessionCookie.secure,
+      });
 
-    return redirect(307, '/app/profile');
-    }
-    catch (err) {
-      return message(form, 'Internal server error');
+      return redirect(307, "/app/profile");
+    } catch (err) {
+      return message(form, "Internal server error");
     }
   },
 };
